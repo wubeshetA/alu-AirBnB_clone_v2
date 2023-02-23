@@ -5,7 +5,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
+from models.amenity import Amenity
 from models.base_model import *
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.city import City
+from models.user import User
 
 
 class DBStorage:
@@ -18,15 +24,17 @@ class DBStorage:
 
         # get environment variables
         user = os.getenv('HBNB_MYSQL_USER')
-        pwd = os.getenv('HBNB_MYSQL_PWD')
+        passwd = os.getenv('HBNB_MYSQL_PWD')
         host = os.getenv('HBNB_MYSQL_HOST')
         db = os.getenv('HBNB_MYSQL_DB')
         port = os.getenv('HBNB_MYSQL_PORT')
         env = os.getenv('HBNB_ENV')
         # storage_type = os.getenv('HBNB_STORAGE_TYPE')
 
-        url = f'mysql+mysqldb://{user}:{pwd}@{host}:{port}/{db}'
-        self.__engine = create_engine(url, pool_pre_ping=True)
+        db_path = ('mysql+mysqldb://{}:{}@{}/{}'
+               .format(user, passwd, host, db))
+
+        self.__engine = create_engine(db_path, pool_pre_ping=True)
         # drop all tables if the environment variable HBNB_ENV is equal to test
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -36,8 +44,9 @@ class DBStorage:
         # create a dictionary
         obj_dict = {}
         if cls is None:
-            for table in Base.metadata.tables:
-                for obj in self.__session.query(table):
+            classes = [State, City]
+            for class_name in classes:
+                for obj in self.__session.query(class_name):
                     key = obj.__class__.__name__ + '.' + obj.id
                     obj_dict[key] = obj
         else:
