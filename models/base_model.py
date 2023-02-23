@@ -5,7 +5,7 @@ from datetime import datetime
 # import important sqlalchemy modules
 from sqlalchemy import Column, String, DateTime, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-
+from os import environ
 
 # print format of create_engine
 # 'mysql+mysqldb://<username>:<password>@<host>:<port>/<db_name>'
@@ -13,32 +13,38 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+storage_type = 'HBNB_TYPE_STORAGE'
+
 
 class BaseModel:
     """A base class for all hbnb models"""
 
-    __tablename__ = 'base_model'
-    id = Column(String(60), primary_key=True, nullable=False)
-    default = str(uuid.uuid4())
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    if storage_type in environ.keys() and environ.get('HBNB_TYPE_STORAGE') == 'db':
+        id = Column(String(60), primary_key=True, nullable=False,
+                    default=str(uuid.uuid4()))
+        created_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
-        if not kwargs:
-            from models import storage
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-        else:
-            for key, val in kwargs.items():
-                if key == '__class__':
-                    continue
-                if key == 'created_at':
-                    val = datetime.fromisoformat(val)
-                elif key == 'updated_at':
-                    val = datetime.fromisoformat(val)
-                self.__setattr__(key, val)
+        if storage_type not in environ.keys() or environ["HBNB_TYPE_STORAGE"] != "db":
+
+            if not kwargs:
+                from models import storage
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.now()
+                self.updated_at = datetime.now()
+            else:
+                for key, val in kwargs.items():
+                    if key == '__class__':
+                        continue
+                    if key == 'created_at':
+                        val = datetime.fromisoformat(val)
+                    elif key == 'updated_at':
+                        val = datetime.fromisoformat(val)
+                    self.__setattr__(key, val)
 
             # kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
             #                                          '%Y-%m-%dT%H:%M:%S.%f')
