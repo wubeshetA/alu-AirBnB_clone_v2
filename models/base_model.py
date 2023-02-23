@@ -10,16 +10,16 @@ from sqlalchemy.ext.declarative import declarative_base
 # print format of create_engine
 # 'mysql+mysqldb://<username>:<password>@<host>:<port>/<db_name>'
 # connect with the mysql database
-engine = create_engine('mysql+mysqldb://hbnb_dev:hbnb_dev_pwd@localhost:3306/hbnb_dev_db')
 
-base = declarative_base()
+Base = declarative_base()
 
-class BaseModel(base):
+
+class BaseModel:
     """A base class for all hbnb models"""
 
     __tablename__ = 'base_model'
     id = Column(String(60), primary_key=True, nullable=False)
-    default=str(uuid.uuid4())
+    default = str(uuid.uuid4())
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
@@ -72,4 +72,4 @@ class BaseModel(base):
         return dictionary
 
 # create all the tables
-base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
