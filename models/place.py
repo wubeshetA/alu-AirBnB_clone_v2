@@ -14,9 +14,12 @@ storage_type = getenv("HBNB_TYPE_STORAGE")
 
 # create a table for the relationship between place and amenity
 place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), ForeignKey(
-                          'places.id'), primary_key=True, nullable=False),
-                      Column('place_name', String(128), ForeignKey('amenities.id'), primary_key=True, nullable=False))
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('place_name', String(128),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -43,7 +46,7 @@ class Place(BaseModel, Base):
 
     else:
         @property
-        def review(self):
+        def reviews(self):
             """ getter attribute reviews that returns the list of Review
             instances with place_id equals to the current Place.id """
 
@@ -64,7 +67,7 @@ class Place(BaseModel, Base):
                 if amenity.id in self.amenity_ids:
                     amenity_list.append(amenity)
             return amenity_list
-        
+
         @amenities.setter
         def set_amenity_ids(self, obj):
             """ setter attribute amenities that handles append method for
