@@ -38,7 +38,7 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     
     # create amenity_ids list to store all Amenity.id linked to the Place
-    amenity_ids = []
+    amenity_id = []
 
     if storage_type == "db":
         reviews = relationship("Review", cascade='all, delete, delete-orphan',
