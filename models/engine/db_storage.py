@@ -44,7 +44,7 @@ class DBStorage:
         # create a dictionary
         obj_dict = {}
         if cls is None:
-            classes = [State, City]
+            classes = [State, City, User, Place, Review, Amenity]
             for class_name in classes:
                 for obj in self.__session.query(class_name):
                     key = obj.__class__.__name__ + '.' + obj.id
