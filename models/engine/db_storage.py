@@ -32,7 +32,7 @@ class DBStorage:
         # storage_type = os.getenv('HBNB_STORAGE_TYPE')
 
         db_path = ('mysql+mysqldb://{}:{}@{}/{}'
-               .format(user, passwd, host, db))
+                   .format(user, passwd, host, db))
 
         self.__engine = create_engine(db_path, pool_pre_ping=True)
         # drop all tables if the environment variable HBNB_ENV is equal to test
@@ -63,7 +63,7 @@ class DBStorage:
         """ commit all changes of the current database session """
         try:
             self.__session.commit()
-        except:
+        except Exception:
             self.__session.rollback()
         finally:
             self.__session.close()
@@ -81,6 +81,6 @@ class DBStorage:
         Session = scoped_session(sec)
         # create a Session
         self.__session = Session()
-        
+
         # Base.metadata.create_all(self.__engine)
         # self.__session = scoped_session(sessionmaker(bind=self.__engine))
