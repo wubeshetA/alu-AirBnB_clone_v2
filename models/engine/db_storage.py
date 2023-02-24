@@ -81,3 +81,6 @@ class DBStorage:
         Session = scoped_session(sec)
         # create a Session
         self.__session = Session()
+        
+        # Base.metadata.create_all(self.__engine)
+        # self.__session = scoped_session(sessionmaker(bind=self.__engine))
