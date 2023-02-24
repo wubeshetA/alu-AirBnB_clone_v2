@@ -3,7 +3,7 @@
 from sqlalchemy import create_engine
 # import declarative base
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 import os
 from models.amenity import Amenity
 from models.base_model import *
@@ -77,6 +77,7 @@ class DBStorage:
         """ create all tables in the database """
         Base.metadata.create_all(self.__engine)
         # create a configured "Session" class
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        sec = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(sec)
         # create a Session
         self.__session = Session()
