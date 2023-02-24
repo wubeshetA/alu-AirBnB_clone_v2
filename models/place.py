@@ -17,7 +17,7 @@ place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60),
                              ForeignKey('places.id'),
                              primary_key=True, nullable=False),
-                      Column('place_name', String(128),
+                      Column('amenity_id', String(128),
                              ForeignKey('amenities.id'),
                              primary_key=True, nullable=False))
 
@@ -66,11 +66,7 @@ class Place(BaseModel, Base):
             instances based on the attribute amenity_ids that contains all
             Amenity.id linked to the Place """
 
-            amenity_list = []
-            for amenity in models.storage.all(Amenity).values():
-                if amenity.id in self.amenity_ids:
-                    amenity_list.append(amenity)
-            return amenity_list
+            return self.amenity_ids
 
         @amenities.setter
         def set_amenity_ids(self, obj):
