@@ -2,6 +2,7 @@
 # This script sets up nginx web server for deployment of web_static
 
 # Install Nginx if it not already installed
+sudo apt-get --fix-missing update 
 sudo apt install nginx -y
 
 # Create folder /data/web_static/shared if it doesn't exist
