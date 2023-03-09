@@ -27,7 +27,8 @@ sudo chown -R ubuntu:ubuntu /data/
 
 # Update Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static
 # (ex: https://mydomainname.tech/hbnb_static)
-
+# Create a Nginx configuration file
+sudo touch /etc/nginx/sites-available/default
 # Write Nginx configuration to file
 echo "server {
     listen 80 default_server;
