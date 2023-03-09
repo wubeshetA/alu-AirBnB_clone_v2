@@ -50,3 +50,5 @@ echo "server {
 
 # Restart Nginx
 sudo service nginx restart
+
+echo $?
