@@ -24,18 +24,14 @@ sudo echo "<html>
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Give ownership of /data/ to ubuntu user and group
-sudo useradd -m ubuntu
-sudo chown -R ubuntu:ubuntu /data/
 
-# Update Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static
-# (ex: https://mydomainname.tech/hbnb_static)
 # Create a Nginx configuration file
 sudo touch /etc/nginx/sites-available/default
 # change the owner of default file to ubuntu
 sudo chown -R ubuntu:ubuntu /etc/nginx/sites-available/default
 sudo chown -R ubuntu:ubuntu /data
 # Write Nginx configuration to file
-echo "server {
+sudo echo "server {
     listen 80 default_server;
     listen [::]:80 default_server;
     root /var/www/html;
