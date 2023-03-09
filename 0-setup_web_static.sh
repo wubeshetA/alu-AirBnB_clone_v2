@@ -31,6 +31,8 @@ sudo chown -R ubuntu:ubuntu /data/
 # (ex: https://mydomainname.tech/hbnb_static)
 # Create a Nginx configuration file
 sudo touch /etc/nginx/sites-available/default
+# change the owner of default file to ubuntu
+sudo chown ubuntu:ubuntu /etc/nginx/sites-available/default
 # Write Nginx configuration to file
 echo "server {
     listen 80 default_server;
