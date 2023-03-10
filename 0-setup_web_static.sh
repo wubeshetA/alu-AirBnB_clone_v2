@@ -50,6 +50,6 @@ echo "server {
         root /var/www/html;
         internal;
     }
-}" > /etc/nginx/sites-available/default
+}" > /etc/nginx/sites-enabled/default
 # Restart Nginx
 sudo service nginx start
