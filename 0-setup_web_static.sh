@@ -12,6 +12,7 @@ sudo mkdir -p /data/web_static/releases/test/
 # Create fake HTML file /data/web_static/releases/test/index.html
 sudo touch /data/web_static/releases/test/index.html
 # Write simple HTML code to fake HTML file
+sudo chown -R ubuntu:ubuntu /data
 sudo echo "<html>
   <head>
   </head>
@@ -29,7 +30,7 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 # sudo touch /etc/nginx/sites-available/default
 # change the owner of default file to ubuntu
 sudo chown -R ubuntu:ubuntu /etc/nginx/sites-available/default
-sudo chown -R ubuntu:ubuntu /data
+
 # Write Nginx configuration to file
 sudo sed -i '/listen 80 default_server;/a \\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-enabled/default
 # Restart Nginx
