@@ -26,29 +26,12 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 # Give ownership of /data/ to ubuntu user and group
 
 # Create a Nginx configuration file
-sudo touch /etc/nginx/sites-available/default
+# sudo touch /etc/nginx/sites-available/default
 # change the owner of default file to ubuntu
 sudo chown -R ubuntu:ubuntu /etc/nginx/sites-available/default
 sudo chown -R ubuntu:ubuntu /data
 # Write Nginx configuration to file
-sudo echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-    location /hbnb_static {
-        alias /data/web_static/current/;
-    }
-    error_page 404 /404.html;
-    location = /404.html {
-        root /var/www/html;
-        internal;
-    }
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}" > /etc/nginx/sites-available/default
-
+sudo sed -i '/listen 80 default_server;/a \\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-enabled/default
 # Restart Nginx
 sudo service nginx restart
 
