@@ -4,7 +4,7 @@
 Returns:
     _type_: _description_
 """
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -32,7 +32,7 @@ def python_is_cool(text="is cool"):
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def is_number(n):
-    return "{} is a number".format(n)
+    return render_template('/web_flask/templates/5-number.html', n=n)
 
 
 if __name__ == '__main__':
