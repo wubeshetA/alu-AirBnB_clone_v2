@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+""" A script that starts a Flask web application and do some dummy stuff
+
+Returns:
+    _type_: _description_
+"""
 from flask import Flask
 
 app = Flask(__name__)
