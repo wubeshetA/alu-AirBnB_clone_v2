@@ -32,7 +32,12 @@ def python_is_cool(text="is cool"):
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def is_number(n):
-    return render_template('/web_flask/templates/5-number.html', n=n)
+    return "{} is a number".format(n)
+
+
+@app.route("/number_template/<n>")
+def number_template(n):
+    return render_template('5-number.html', number=n)
 
 
 if __name__ == '__main__':
