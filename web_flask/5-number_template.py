@@ -35,7 +35,7 @@ def is_number(n):
     return "{} is a number".format(n)
 
 
-@app.route("/number_template/<n>")
+@app.route("/number_template/<int:n>")
 def number_template(n):
     return render_template('5-number.html', number=n)
 
