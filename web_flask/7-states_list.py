@@ -1,5 +1,9 @@
-#!/urs/bin/python3
+#!/usr/bin/python3
+""" A flask server to return id and name of a State object
 
+Returns:
+    _type_: _description_
+"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
