@@ -7,10 +7,10 @@
         <H1>States</H1>
         <UL>
             {% for state in states %}
-            <LI>{{ state.id }} : <B>{{ state.name }}</B>
+            <LI>{{ state.id }}: <B>{{ state.name }}</B>
                 <ul>
                     {% for city in states[state] %}
-                            <li>{{ city.id }} : {{ city.name }}</li>
+                            <li>{{ city.id }}: {{ city.name }}</li>
                     {% endfor %}
                 </ul>
             </LI>
