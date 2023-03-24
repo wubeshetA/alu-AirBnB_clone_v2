@@ -12,6 +12,7 @@ from models.city import City
 from models.user import User
 from models.base_model import Base
 
+
 class DBStorage:
 
     # private class attributes
@@ -82,6 +83,6 @@ class DBStorage:
 
         # Base.metadata.create_all(self.__engine)
         # self.__session = scoped_session(sessionmaker(bind=self.__engine))
-        
+
     def close(self):
         self.__session.close()
