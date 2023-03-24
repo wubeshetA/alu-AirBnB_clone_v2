@@ -16,9 +16,7 @@ def states_list():
     """ display a HTML page """
     # return a list of State object.
     states = list(storage.all(State).values())
-
-    print("states_list")
-    print(states)
+    states = sorted(states, key=lambda state: state.name)
     return render_template('7-states_list.html', states=states)
 
 
