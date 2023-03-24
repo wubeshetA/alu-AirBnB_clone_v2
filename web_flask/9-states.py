@@ -78,13 +78,13 @@ def states(id=None):
                 cities = sorted(
                     state.cities(), key=lambda city: city.name.lower())
 
-            return render_template('9-states.html', state=state, cities=cities, found=1)
+            return render_template('9-states.html',
+                                   state=state, cities=cities, found=1)
 
     else:
         states = list(storage.all().values())
         states = sorted(states, key=lambda state: state.name.lower())
         return render_template('9-states.html', states=states, found=2)
-        #! make sure to change the template above
 
 
 if __name__ == '__main__':
