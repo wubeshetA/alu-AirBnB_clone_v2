@@ -17,3 +17,15 @@ class State(BaseModel, Base):
     name = Column(String(128), nullable=False)
     cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
+
+    # dd a public getter method cities to return the list of City objects from storage linked to the current State
+    @property
+    def cities(self):
+        """getter attribute cities that returns the list of City objects from storage linked to the current State"""
+        from models import storage
+        from models.city import City
+        cities = []
+        for key, value in storage.all(City).items():
+            if value.state_id == self.id:
+                cities.append(value)
+        return cities

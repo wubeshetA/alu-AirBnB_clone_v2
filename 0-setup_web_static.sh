@@ -12,8 +12,8 @@ sudo mkdir -p /data/web_static/releases/test/
 # Create fake HTML file /data/web_static/releases/test/index.html
 sudo touch /data/web_static/releases/test/index.html
 # Write simple HTML code to fake HTML file
-sudo chown -R ubuntu:ubuntu /data
-sudo echo "<html>
+
+echo "<html>
   <head>
   </head>
   <body>
@@ -24,11 +24,7 @@ sudo echo "<html>
 
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-# Give ownership of /data/ to ubuntu user and group
-
-# Create a Nginx configuration file
-# sudo touch /etc/nginx/sites-available/default
-# change the owner of default file to ubuntu
+sudo chown -R ubuntu:ubuntu /data
 sudo chown -R ubuntu:ubuntu /etc/nginx/sites-available/default
 
 # Write Nginx configuration to file
